@@ -1,0 +1,73 @@
+version: '3.8'
+# version: le dice a Docker que versión del formato usar
+
+services:
+  # services: lista de contenedores que vamos a levantar
+
+  postgres:
+    # postgres: nombre que le damos al servicio (podría ser cualquier nombre)
+    image: postgres:16
+    # image: que imagen de Docker Hub usar
+    # postgres:16 = PostgreSQL versión 16 (la más reciente estable)
+    container_name: curso_postgres
+    # container_name: nombre del contenedor que verás en "docker ps"
+
+    environment:
+      # environment: variables de entorno que el contenedor va a usar
+      # El $ significa "leer el valor del archivo .env"
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+
+    ports:
+      - '5432:5432'
+      # ports: mapeo de puertos
+      # "5432:5432" = puerto 5432 del contenedor → puerto 5432 de tu máquina
+      # El primer número es tu máquina, el segundo es el contenedor
+      # Así puedes conectarte desde tu máquina usando localhost:5432
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      # volumes: donde se guardan los datos de forma persistente
+      # Si apagas el contenedor, los datos NO se pierden
+      # postgres_data es el nombre del volumen (declarado abajo)
+      # /var/lib/postgresql/data es donde PostgreSQL guarda los datos DENTRO del contenedor
+
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      # Este segundo volumen monta nuestro archivo init.sql dentro del contenedor
+      # PostgreSQL ejecuta automáticamente cualquier .sql en esa carpeta al iniciar por primera vez
+
+    healthcheck:
+      test: ['CMD-SHELL', 'pg_isready -U ${POSTGRES_USER}']
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      # healthcheck: Docker verifica periódicamente si el servicio está listo
+      # pg_isready es un comando que PostgreSQL usa para auto-verificarse
+      # interval: verificar cada 10 segundos
+      # retries: intentar 5 veces antes de declararlo como fallido
+
+  pgadmin:
+    # pgadmin: interfaz web para ver y manejar PostgreSQL visualmente
+    image: dpage/pgadmin4
+    container_name: curso_pgadmin
+
+    environment:
+      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+
+    ports:
+      - '5050:80'
+      # El puerto 80 del contenedor (HTTP) lo mapeamos al 5050 de tu máquina
+      # Accedes a pgAdmin en: http://localhost:5050
+
+    depends_on:
+      postgres:
+        condition: service_healthy
+      # depends_on: pgAdmin solo levanta DESPUÉS de que PostgreSQL esté healthy
+      # Esto evita que pgAdmin intente conectarse a una BD que no está lista
+
+volumes:
+  postgres_data:
+    # Aquí declaramos los volúmenes que usamos arriba
+    # Docker crea y gestiona esta carpeta automáticamente

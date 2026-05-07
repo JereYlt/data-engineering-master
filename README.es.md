@@ -30,7 +30,7 @@ Roadmap profesional desde cero hasta Senior en **Ingeniería de Datos + ML + IA 
 ## 🚀 Inicio rápido
 
 ```bash
-git clone https://github.com/TU_USUARIO/data-ml-engineer-roadmap.git
-cd data-ml-engineer-roadmap/fase-00-entorno
+git clone https://github.com/JereYlt/data-engineering-master.git
+cd data-engineering-master/fase-00-entorno
 cp .env.example .env
 docker-compose up -d

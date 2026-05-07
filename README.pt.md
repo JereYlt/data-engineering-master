@@ -30,7 +30,7 @@ Roteiro profissional do zero até Sênior em **Engenharia de Dados + ML + IA + B
 ## 🚀 Início rápido
 
 ```bash
-git clone https://github.com/SEU_USUARIO/data-ml-engineer-roadmap.git
-cd data-ml-engineer-roadmap/fase-00-entorno
+git clone https://github.com/JereYlt/data-engineering-master.git
+cd data-engineering-master/fase-00-entorno
 cp .env.example .env
 docker-compose up -d

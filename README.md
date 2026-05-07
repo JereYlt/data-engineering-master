@@ -24,7 +24,7 @@ Professional roadmap from zero to Senior in **Data Engineering + ML Engineering 
 ## 🚀 Quick start
 
 ```bash
-git clone https://github.com/YOUR_USER/data-ml-engineer-roadmap.git
-cd data-ml-engineer-roadmap/fase-00-entorno
+git clone https://github.com/JereYlt/data-engineering-master.git
+cd data-engineering-master/fase-00-entorno
 cp .env.example .env
 docker-compose up -d
