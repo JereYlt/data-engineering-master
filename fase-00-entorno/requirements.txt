@@ -1,0 +1,18 @@
+# requirements.txt
+# Librerias del Modulo 0
+fastapi==0.115.0
+# FastAPI: el framework para crear la API REST
+uvicorn[standard]==0.30.0
+# uvicorn: el servidor que ejecuta FastAPI
+pydantic==2.9.0
+# pydantic: validacion de datos con tipos
+pydantic-settings==2.5.0
+# pydantic-settings: cargar configuracion desde .env
+pytest==8.3.0
+# pytest: el framework de testing mas usado en Python
+pytest-cov==5.0.0
+# pytest-cov: medir cuanto codigo estan cubriendo los tests
+httpx==0.27.0
+# httpx: cliente HTTP para hacer tests de la API
+ruff==0.6.0
+# ruff: linter (detecta problemas de estilo) ultrarapido
