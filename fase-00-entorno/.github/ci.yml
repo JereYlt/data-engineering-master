@@ -1,46 +1,34 @@
-# .github/workflows/ci.yml
 name: CI Pipeline
-# name: nombre que aparece en GitHub Actions
+
 on:
- push:
- branches: [main]
- pull_request:
- branches: [main]
-# on: cuando ejecutar este workflow
-# push a main: cuando subes codigo directamente a main
-# pull_request: cuando creas un PR hacia main
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
 jobs:
-# jobs: lista de trabajos a ejecutar
- ci:
- # ci: nombre del job
- runs-on: ubuntu-latest
- # runs-on: en que sistema operativo ejecutar
- # ubuntu-latest: la version mas reciente de Ubuntu en los servidores de GitHub
- steps:
- # steps: lista de pasos dentro del job
- - name: Clonar el repositorio
- uses: actions/checkout@v4
- # uses: usar una action pre-construida
- # actions/checkout: clona tu repositorio en el servidor de GitHub
- - name: Configurar Python 3.12
- uses: actions/setup-python@v5
- with:
- python-version: "3.12"
- # setup-python: instala la version de Python especificada
- - name: Instalar dependencias
- run: pip install -r fase-00-entorno/requirements.txt
- # run: ejecutar un comando de shell
- - name: Linting con Ruff
- run: ruff check fase-00-entorno/app/
- # Ruff verifica que el codigo cumple las convenciones de estilo
- # Si hay problemas, el paso falla y el CI se detiene aqui
- - name: Ejecutar tests con cobertura
- run: |
- cd fase-00-entorno
- pytest tests/ --cov=app --cov-fail-under=80
- # --cov-fail-under=80: el paso falla si coverage < 80%
- # | (pipe): permite multiples comandos en el mismo paso
- - name: Construir imagen Docker
- run: docker build -t microservicio-observable:test fase-00-entorno/
- # Verifica que el Dockerfile construye sin errores
- # Si el build falla, el CI se detiene aqui
+  ci:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clonar el repositorio
+        uses: actions/checkout@v4
+
+      - name: Configurar Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Instalar dependencias
+        run: pip install -r fase-00-entorno/requirements.txt
+
+      - name: Linting con Ruff
+        run: ruff check fase-00-entorno/app/
+
+      - name: Ejecutar tests con cobertura
+        run: |
+          cd fase-00-entorno
+          pytest tests/ --cov=app --cov-fail-under=80
+
+      - name: Construir imagen Docker
+        run: docker build -t microservicio-observable:test fase-00-entorno/
