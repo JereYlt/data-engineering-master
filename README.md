@@ -11,7 +11,7 @@ Professional roadmap from zero to Senior in **Data Engineering + ML Engineering 
 
 ## 🌟 Features
 
-- **40 weeks**, 20–25h/week
+ 
 - **19 portfolio projects** (real production code)
 - **Full modern stack**: Docker, PostgreSQL, dbt, FastAPI, Kafka, Airflow, XGBoost, PyTorch, MLOps, RAG, Kubernetes, Terraform
 - **CI/CD**, load testing, observability, security, IaC

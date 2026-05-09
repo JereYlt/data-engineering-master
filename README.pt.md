@@ -17,7 +17,7 @@ Roteiro profissional do zero ao nível Sênior em **Engenharia de Dados + Engenh
 
 ## 🌟 Características
 
-- **40 semanas**, 20–25h/semana
+ 
 - **19 projetos de portfólio** (código pronto para produção)
 - **Stack completo e moderno**: Docker, PostgreSQL, dbt, FastAPI, Kafka, Airflow, XGBoost, PyTorch, MLOps, RAG, Kubernetes, Terraform
 - **CI/CD**, testes de carga, observabilidade, segurança, IaC

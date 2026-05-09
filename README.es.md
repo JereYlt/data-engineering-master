@@ -17,7 +17,7 @@ Roadmap profesional desde cero hasta Senior en **Ingeniería de Datos + Ingenier
 
 ## 🌟 Características
 
-- **40 semanas**, 20–25h/semana
+ 
 - **19 proyectos de portafolio** (código listo para producción)
 - **Stack completo moderno**: Docker, PostgreSQL, dbt, FastAPI, Kafka, Airflow, XGBoost, PyTorch, MLOps, RAG, Kubernetes, Terraform
 - **CI/CD**, pruebas de carga, observabilidad, seguridad, IaC
