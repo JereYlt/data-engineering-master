@@ -4,7 +4,7 @@
 ## 📄 `README.pt.md` (portugués) – ya con JereYlt
 
 ```markdown
-# 🚀 Roteiro de Engenheiro de Dados e IA
+# 🚀 Backend · Dados · IA – Portfólio Profissional
 
 [![ES](https://img.shields.io/badge/Español-README.es-red)](README.es.md)
 [![PT](https://img.shields.io/badge/Português-README.pt-brightgreen)](README.pt.md)
