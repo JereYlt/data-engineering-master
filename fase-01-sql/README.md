@@ -1,24 +1,25 @@
-# Proyecto 2 – ETL Incremental Profesional
+# Project 2 – Professional Incremental ETL
 
-## Descripción
-Pipeline ETL que carga datos de ventas desde `pedidos` y `detalle_pedidos` hacia una tabla de hechos (`hechos_ventas`). El proceso es **incremental** (solo registros nuevos), **idempotente** (no duplica al ejecutarse varias veces) y cuenta con **auditoría completa** (`etl_control` y `etl_log`).
+## Description
+This ETL pipeline extracts sales data from `pedidos` and `detalle_pedidos` tables, transforms it (calculates subtotals, filters completed orders), and loads it into a fact table `hechos_ventas`. The process is **incremental** (only new records), **idempotent** (no duplicates if run twice), and includes full **audit logging** (`etl_control`, `etl_log`).
 
-## Tecnologías
+## Technologies
 - PostgreSQL 16
-- PL/pgSQL (stored procedures)
+- PL/pgSQL (stored procedures, functions)
+- Indexes for query optimization
 
-## Estructura de archivos
-- `01_modelo_datos.sql` – creación de tablas (hechos_ventas, etl_control, etl_log)
-- `02_function_descuento.sql` – función auxiliar para calcular descuento
-- `03_etl_procedure.sql` – procedimiento ETL principal
-- `04_queries_analiticas.sql` – tres consultas analíticas sobre hechos_ventas
-- `capturas/` – evidencia de ejecución (pantallazos)
+## File Structure
+| File | Purpose |
+|------|---------|
+| `01_modelo_datos.sql` | Creates fact table `hechos_ventas`, control table `etl_control`, and log table `etl_log`. |
+| `02_function_descuento.sql` | Auxiliary function to calculate discount based on order total. |
+| `03_etl_procedure.sql` | Main ETL stored procedure (`etl_cargar_ventas`). |
+| `04_queries_analiticas.sql` | Three analytical queries: weekly sales, top 5 products, RFM analysis. |
+| `capturas/` | Screenshots showing execution results, log entries, and performance improvements. |
 
-## Cómo ejecutar
-1. Asegúrate de que PostgreSQL esté corriendo (Docker).
-2. Conéctate a la base de datos `cursodb`.
-3. Ejecuta los archivos en orden:
-   ```bash
-   psql -U admin -d cursodb -f 01_modelo_datos.sql
-   psql -U admin -d cursodb -f 02_function_descuento.sql
-   psql -U admin -d cursodb -f 03_etl_procedure.sql
+## How to Run
+
+### 1. Prepare the environment (PostgreSQL must be running)
+```bash
+cd fase-00-entorno
+docker-compose up -d
